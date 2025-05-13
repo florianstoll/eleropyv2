@@ -62,10 +62,10 @@ def on_connect(client, userdata, flags, rc):
     print(f"Published alive to {availability_topic}")
 
 
-def connect_and_subscribe(client_name, mqtt_server, mqtt_port, topic_sub):
+def connect_and_subscribe(client_name, mqtt_server, mqtt_port, topic_sub, username, password):
     print(f"Connecting to broker {mqtt_server}...")
     client = mqtt.Client()
-    client.username_pw_set(username="esp_pub", password="esp_pub")
+    client.username_pw_set(username=username, password=password)
     client.on_message = sub_cb
     client.on_connect = on_connect
     client.connect(host=mqtt_server, port=mqtt_port)
@@ -85,8 +85,10 @@ try:
     attributes_topic = config.get_config()["mqtt"]["attributes_topic"]
     mqtt_client_name = config.get_config()["mqtt"]["client_name"]
     base_topic = config.get_config()["mqtt"]["base_topic"]
+    user = config.get_config["mqtt"]("user")
+    password = config.get_config["mqtt"]("password")
     client = connect_and_subscribe(mqtt_server=mqtt_server, mqtt_port=mqtt_port, client_name=mqtt_client_name,
-                                   topic_sub=mqtt_topic)
+                                   topic_sub=mqtt_topic, username=user, password=password)
     print("OK!!")
     radio = Radio(radio_config=config.get_config()["radio"], radio_wiring=config.get_config()["wiring"])
     protocol_handler = Handler(addresses=config.get_config()["addresses"], debug=config.get_config()["debug"],

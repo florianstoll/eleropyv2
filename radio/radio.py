@@ -1,4 +1,4 @@
-from radio.cc1101 import CC1101
+from radio.cc1101 import cc1101
 import time
 
 
@@ -7,7 +7,7 @@ class Radio:
         if radio_config:
             self.radio_config = radio_config
             self.radio_wiring = radio_wiring
-            self.radio = CC1101(spibus=self.radio_wiring["spibus"], spics=self.radio_wiring["spics"],
+            self.radio = cc1101(spibus=self.radio_wiring["spibus"], spics=self.radio_wiring["spics"],
                                 speed=self.radio_wiring["speed"], gdo0=self.radio_wiring["gdo0"],
                                 gdo2=self.radio_wiring["gdo2"])
 
