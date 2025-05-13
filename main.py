@@ -85,8 +85,8 @@ try:
     attributes_topic = config.get_config()["mqtt"]["attributes_topic"]
     mqtt_client_name = config.get_config()["mqtt"]["client_name"]
     base_topic = config.get_config()["mqtt"]["base_topic"]
-    user = config.get_config()["mqtt"]("user")
-    password = config.get_config()["mqtt"]("pass")
+    user = config.get_config()["mqtt"]["user"]
+    password = config.get_config()["mqtt"]["pass"]
     client = connect_and_subscribe(mqtt_server=mqtt_server, mqtt_port=mqtt_port, client_name=mqtt_client_name,
                                    topic_sub=mqtt_topic, username=user, password=password)
     print("OK!!")
